@@ -125,6 +125,7 @@ $(BUILD):
 	echo $(CFILES)
 	echo $(OFILES)
 	@[ -d $@ ] || mkdir -p $@
+	mkdir -p $(CURDIR)/source/grit/
 	rm -f $(CURDIR)/source/grit/*
 	grit img/nintendo.png -gt -gB8 -m -ma0 -ftc -pu16 -aw 256 -ah 256 -W2 -fa -o source/grit/nintendo
 
