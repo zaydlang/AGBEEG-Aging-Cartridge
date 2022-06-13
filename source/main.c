@@ -9,6 +9,8 @@ int main() {
 
     while (1) {
         Halt();
+        REG_IF = 0xFFFF;
+
         key_poll();
 
         state_run();
