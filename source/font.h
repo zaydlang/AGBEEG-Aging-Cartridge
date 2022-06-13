@@ -8,6 +8,7 @@ typedef struct PrintData {
 void init_print(int bg, int screenblock, int charblock);
 void ags_print(char* string, int x, int y, int palette);
 void ags_printf(char* string, int x, int y, int palette, ...);
+void ags_erase(int x1, int y, int x2);
 
 #define NUM_CHARACTERS_IN_FONT 41
 

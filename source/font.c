@@ -50,3 +50,9 @@ void ags_printf(char* format, int x, int y, int palette, ...) {
     va_end(va);
     ags_print((char*) printf_out, x, y, palette);
 } 
+
+void ags_erase(int x1, int y, int x2) {
+    for (int x = x1; x < x2; x++) {
+        se_mem[print_data.screenblock][y * 32 + x] = 0xFF;
+    }
+}
