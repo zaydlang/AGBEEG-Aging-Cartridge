@@ -10,8 +10,8 @@ static int g_cursor_x = 0;
 static int g_cursor_y = 0;
 
 static int all_tests_pass;
-static int display_error_text;
-static int frames_till_toggle_error_text;
+static int display_status_text;
+static int frames_till_toggle_status_text;
 
 static void update_cursor_pos() {
     oam_mem[0].attr0 = (g_cursor_y * 2 + 2) * 8;
@@ -56,9 +56,7 @@ static void do_and_draw_test_results() {
         draw_y += 2;
     }
 
-    if (all_tests_pass) {
-        ags_print("CONGRATULATIONS!!", 7, 17, 4);
-    }
+    display_status_text = 1;
 }
 
 void state_init_menu() {
@@ -75,19 +73,23 @@ void state_init_menu() {
 
     update_cursor_pos();
     memcpy(tile_mem_obj[0], CURSOR_TEXTURE, sizeof(CURSOR_TEXTURE));
-    frames_till_toggle_error_text = 32;
+    frames_till_toggle_status_text = 32;
 }
 
 void state_run_menu() {
-    frames_till_toggle_error_text--;
+    frames_till_toggle_status_text--;
 
-    if (frames_till_toggle_error_text == 0) {
-        frames_till_toggle_error_text = 32;
-        display_error_text ^= 1;
+    if (frames_till_toggle_status_text == 0) {
+        frames_till_toggle_status_text = 32;
+        display_status_text ^= 1;
     }
 
-    if (!all_tests_pass && display_error_text) {
-        ags_print("ERROR OCCURED!!", 8, 17, 4);
+    if (display_status_text) {
+        if (all_tests_pass) {
+            ags_print("CONGRATULATIONS!!", 7, 17, 4);
+        } else {
+            ags_print("ERROR OCCURED!!", 8, 17, 4);
+        }
     } else {
         ags_erase(8, 17, 23);
     }
