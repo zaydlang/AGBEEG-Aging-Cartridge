@@ -29,7 +29,7 @@ IMG := $(CURDIR)/img
 #---------------------------------------------------------------------------------
 TARGET		:= $(notdir $(CURDIR))
 BUILD		:= build
-SOURCES		:= source source/grit source/tests source/tests/prefetch source/tests/cpu source/tests/dma
+SOURCES		:= source source/grit source/tests source/tests/cartridge source/tests/cpu source/tests/dma
 INCLUDES	:= include
 DATA		:=
 MUSIC		:=

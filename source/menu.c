@@ -65,7 +65,7 @@ void state_init_menu() {
 
     init_print(0, 28, 3);
     ags_print("AGBEEG AGING CARTRIDGE", 1, 0, 2);
-    ags_print("PREFETCHER..", 2, 2, 3);
+    ags_print("CARTRIDGE...", 2, 2, 3);
     ags_print("CPU.........", 2, 4, 3);
     ags_print("DMA.........", 2, 6, 3);
 

@@ -40,7 +40,7 @@ void test_cpu_runs_idles_throughout_dma_info_run();
 void state_test_info_init(void* args);
 void state_test_info_run();
 
-static const TestCategory test_category_prefetch = {
+static const TestCategory test_category_cartridge = {
     {
         { "ROM ACCESS DURING PREFETCH", test_rom_access_during_prefetch, test_rom_access_during_prefetch_info_init, test_rom_access_during_prefetch_info_run },
         { NULL }
@@ -68,7 +68,7 @@ static const TestCategory test_category_dma = {
 };
 
 static const TestCategory test_categories[NUM_TEST_CATEGORIES] = {
-    test_category_prefetch,
+    test_category_cartridge,
     test_category_cpu,
     test_category_dma
 };
