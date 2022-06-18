@@ -9,3 +9,11 @@ This cartridge is very similar to AGS. Unlike AGS though, this cartridge allows 
 
 
 Note that this is very much a WIP test suite. There are only a few tests as of writing this, and I don't know how to pass all of them. As time passes, I intend to add more tests to this project. PRs welcome!
+
+## Using this Test Rom for CI
+
+Using this test rom for CI is actually really easy. Create a single-byte MMIO register at 0x04999990. The ROM will send test results to that address in the following format:
+- null-terminated test name (as a string)
+- null-terminated test result ("PASS" or "FAIL")
+- ... repeat for all tests ...
+- null-terminated text "DONE"

@@ -1,6 +1,7 @@
 #include <tonc.h>
 #include <string.h>
 
+#include "ci.h"
 #include "font.h"
 #include "menu.h"
 #include "tests/tests.h"
@@ -32,6 +33,10 @@ static void do_and_draw_test_results() {
             Test test = test_category.tests[j];
             TestResult test_result = test.run_test();
 
+            char* ci_result = test_result == PASS ? "PASS" : "FAIL";
+            ci_send(test.name, strlen(test.name));
+            ci_send(ci_result, 4);
+
             switch (test_result) {
                 case PASS:
                     ags_print("O", draw_x, draw_y, 5);
@@ -56,6 +61,7 @@ static void do_and_draw_test_results() {
         draw_y += 2;
     }
 
+    ci_send("DONE", 4);
     display_status_text = 1;
 }
 
