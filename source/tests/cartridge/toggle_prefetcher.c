@@ -201,7 +201,7 @@ static bool do_test(int (*tests[4])(), int (*calibration[4])(), unsigned short e
         for (int w = 0; w < 4; w++) {
             int waitstate = waitstates[w];
 
-            // GBA (or 3DS, unknown as of yet) hangs if you assign REG_WAITCNT
+            // GBA hangs if you assign REG_WAITCNT
             // too frequently, hence the waitloops
 
             REG_WAITCNT = waitstate;
