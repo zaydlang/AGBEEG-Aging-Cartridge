@@ -29,6 +29,10 @@ TestResult test_rom_access_during_prefetch();
 void test_rom_access_during_prefetch_info_init();
 void test_rom_access_during_prefetch_info_run();
 
+TestResult test_toggle_prefetcher();
+void test_toggle_prefetcher_info_init();
+void test_toggle_prefetcher_info_run();
+
 TestResult test_cpu_swp_locks_bus();
 void test_cpu_swp_locks_bus_info_init();
 void test_cpu_swp_locks_bus_info_run();
@@ -43,10 +47,11 @@ void state_test_info_run();
 static const TestCategory test_category_cartridge = {
     {
         { "ROM ACCESS DURING PREFETCH", test_rom_access_during_prefetch, test_rom_access_during_prefetch_info_init, test_rom_access_during_prefetch_info_run },
+        { "TOGGLE PREFETCHER", test_toggle_prefetcher, test_toggle_prefetcher_info_init, test_toggle_prefetcher_info_run },
         { NULL }
     },
 
-    1
+    2
 };
 
 static const TestCategory test_category_cpu = {
