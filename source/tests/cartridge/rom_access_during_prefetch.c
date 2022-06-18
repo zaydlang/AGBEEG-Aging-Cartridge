@@ -166,10 +166,10 @@ static int (*write_tests[8])() = {write_test1, write_test2, write_test3, write_t
 
 static int waitstates[4] = {0x4000, 0x4004, 0x4010, 0x4014};
 
-__attribute__((section(".iwram"))) unsigned short read_results[32];
-__attribute__((section(".iwram"))) unsigned short write_results[32];
+__attribute__((section(".iwram"))) static unsigned short read_results[32];
+__attribute__((section(".iwram"))) static unsigned short write_results[32];
 
-unsigned short read_expected[32] = {
+static unsigned short read_expected[32] = {
     0x11, 0x0f, 0x0f, 0x0d,
     0x11, 0x0f, 0x0f, 0x0d,
     0x11, 0x0f, 0x0f, 0x0d,
@@ -180,7 +180,7 @@ unsigned short read_expected[32] = {
     0x11, 0x0f, 0x0f, 0x0d,
 };
 
-unsigned short write_expected[32] = {
+static unsigned short write_expected[32] = {
     0x10, 0x0e, 0x0e, 0x0c,
     0x10, 0x0e, 0x0e, 0x0c,
     0x10, 0x0e, 0x0e, 0x0c,
@@ -191,7 +191,7 @@ unsigned short write_expected[32] = {
     0x10, 0x0e, 0x0e, 0x0c,
 };
 
-bool do_read_test() {
+static bool do_read_test() {
     bool all_correct = true;
     for (int i = 0; i < NUM_TESTS; i++) {
         for (int w = 0; w < 4; w++) {
@@ -206,7 +206,7 @@ bool do_read_test() {
     return all_correct;
 }
 
-bool do_write_test() {
+static bool do_write_test() {
     bool all_correct = true;
     for (int i = 0; i < NUM_TESTS; i++) {
         for (int w = 0; w < 4; w++) {
@@ -227,7 +227,7 @@ TestResult test_rom_access_during_prefetch() {
     return PASS;
 }
 
-void display_test_results(char* name, unsigned short* expected, unsigned short* results) {
+static void display_test_results(char* name, unsigned short* expected, unsigned short* results) {
     ags_print("WAIT:     .. N. .S NS", 2, 1, 3);
     ags_print(name, 24, 1, 6);
     ags_print("EXPECTED:", 0, 2, 3);
