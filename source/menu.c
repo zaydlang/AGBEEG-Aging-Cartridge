@@ -91,7 +91,7 @@ void state_run_menu() {
             ags_print("ERROR OCCURED!!", 8, 17, 4);
         }
     } else {
-        ags_erase(8, 17, 23);
+        ags_erase(7, 17, 24);
     }
 
     if (key_hit(KEY_A)) {
