@@ -10,9 +10,19 @@ void ags_print(char* string, int x, int y, int palette);
 void ags_printf(char* string, int x, int y, int palette, ...);
 void ags_erase(int x1, int y, int x2);
 
-#define NUM_CHARACTERS_IN_FONT 41
+#define NUM_CHARACTERS_IN_FONT 42
 
 static const uint8_t FONT[NUM_CHARACTERS_IN_FONT][8][4] = {
+    {
+        { 00,00,00,00 },
+        { 00,00,00,00 },
+        { 00,00,00,00 },
+        { 00,00,00,00 },
+        { 00,00,00,00 },
+        { 00,00,00,00 },
+        { 00,00,00,00 },
+        { 00,00,00,00 },
+    },
     { 
         { 16,17,17,00 },
         { 17,00,16,01 },

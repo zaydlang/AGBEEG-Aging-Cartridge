@@ -11,21 +11,21 @@ static PrintData print_data;
 void init_print(int bg, int screenblock, int charblock) {
     print_data.screenblock = screenblock;
 
-    memset(&se_mem[screenblock], 0xFF, 32 * 32 * 2);
+    memset(&se_mem[screenblock], 0, 32 * 32 * 2);
     memcpy(&tile_mem[charblock], FONT, NUM_CHARACTERS_IN_FONT * 8 * 4);
 }
 
 static uint8_t get_texture_index_from_character(char c) {
-    if ('A' <= c && c <= 'Z') return c - 'A';
-    if ('0' <= c && c <= '9') return c - '0' + 31;
+    if ('A' <= c && c <= 'Z') return c - 'A' + 1;
+    if ('0' <= c && c <= '9') return c - '0' + 32;
 
-    if (c == '.') return 26;
-    if (c == '>') return 27;
-    if (c == '!') return 28;
-    if (c == '_') return 29;
-    if (c == ':') return 30;
+    if (c == '.') return 27;
+    if (c == '>') return 28;
+    if (c == '!') return 29;
+    if (c == '_') return 30;
+    if (c == ':') return 31;
 
-    return 0xFF;
+    return 0;
 }
 
 static void print_character(char c, int tile, int palette) {
