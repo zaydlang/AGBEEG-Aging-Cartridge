@@ -17,6 +17,9 @@ static int g_cursor_y = 0;
 static int all_tests_pass;
 static int display_status_text;
 static int frames_till_toggle_status_text;
+static int frames_till_music_start;
+
+static bool started_sound = false;
 
 static void update_cursor_pos() {
     oam_mem[0].attr0 = (g_cursor_y * 2 + 2) * 8;
@@ -83,11 +86,35 @@ void state_init_menu() {
     update_cursor_pos();
     memcpy(tile_mem_obj[0], CURSOR_TEXTURE, sizeof(CURSOR_TEXTURE));
     frames_till_toggle_status_text = 32;
+
+    started_sound = false;
 }
 
 void state_run_menu() {
     if (all_tests_pass) {
-        mmResume();
+        if (!started_sound) {
+            started_sound = true;
+
+            mm_sound_effect congratulations = {
+                { SFX_CONGRATULATIONS } ,			// id
+                (int)(1.0f * (1<<10)),	// rate
+                0,		// handle
+                255,	// volume
+                127,	// panning
+            };
+
+            frames_till_music_start = 136;
+
+            mmEffectEx(&congratulations);
+        }
+
+        if (frames_till_music_start == 0) {
+            mmStart( MOD_MUSIC, MM_PLAY_LOOP );
+        }
+
+        if (frames_till_music_start > -1) {
+            frames_till_music_start--;
+        }
     }
 
     frames_till_toggle_status_text--;

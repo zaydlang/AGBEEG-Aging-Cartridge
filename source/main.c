@@ -15,8 +15,6 @@ int main() {
 	irq_add(II_VBLANK, mmVBlank);
         
     mmInitDefault( (mm_addr)soundbank_bin, 16 );
-    mmStart( MOD_MUSIC, MM_PLAY_LOOP );
-    mmPause();
 
     while (1) {
         Halt();
