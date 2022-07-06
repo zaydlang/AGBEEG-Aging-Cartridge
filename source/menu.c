@@ -1,11 +1,15 @@
 #include <tonc.h>
 #include <string.h>
+#include <maxmod.h>
 
 #include "ci.h"
 #include "font.h"
 #include "menu.h"
 #include "tests/tests.h"
 #include "video.h"
+
+#include "soundbank.h"
+#include "soundbank_bin.h"
 
 static int g_cursor_x = 0;
 static int g_cursor_y = 0;
@@ -65,10 +69,9 @@ static void do_and_draw_test_results() {
     display_status_text = 1;
 }
 
-void state_init_menu() {
-    REG_IME = 0;
-    REG_IE  = 1;
 
+
+void state_init_menu() {
     init_print(0, 28, 3);
     ags_print("AGBEEG AGING CARTRIDGE", 1, 0, 2);
     ags_print("CARTRIDGE...", 2, 2, 3);
@@ -83,6 +86,10 @@ void state_init_menu() {
 }
 
 void state_run_menu() {
+    if (all_tests_pass) {
+        mmResume();
+    }
+
     frames_till_toggle_status_text--;
 
     if (frames_till_toggle_status_text == 0) {
