@@ -32,7 +32,7 @@ BUILD		:= build
 SOURCES		:= source source/grit source/tests source/tests/cartridge source/tests/cpu source/tests/dma
 INCLUDES	:= include
 DATA		:=
-MUSIC		:=
+MUSIC		:= maxmod_data
 
 #---------------------------------------------------------------------------------
 # options for code generation

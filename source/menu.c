@@ -1,5 +1,6 @@
 #include <tonc.h>
 #include <string.h>
+#include <maxmod.h>
 
 #include "ci.h"
 #include "font.h"
@@ -7,12 +8,18 @@
 #include "tests/tests.h"
 #include "video.h"
 
+#include "soundbank.h"
+#include "soundbank_bin.h"
+
 static int g_cursor_x = 0;
 static int g_cursor_y = 0;
 
 static int all_tests_pass;
 static int display_status_text;
 static int frames_till_toggle_status_text;
+static int frames_till_music_start;
+
+static bool started_sound = false;
 
 static void update_cursor_pos() {
     oam_mem[0].attr0 = (g_cursor_y * 2 + 2) * 8;
@@ -65,10 +72,9 @@ static void do_and_draw_test_results() {
     display_status_text = 1;
 }
 
-void state_init_menu() {
-    REG_IME = 0;
-    REG_IE  = 1;
 
+
+void state_init_menu() {
     init_print(0, 28, 3);
     ags_print("AGBEEG AGING CARTRIDGE", 1, 0, 2);
     ags_print("CARTRIDGE...", 2, 2, 3);
@@ -80,9 +86,37 @@ void state_init_menu() {
     update_cursor_pos();
     memcpy(tile_mem_obj[0], CURSOR_TEXTURE, sizeof(CURSOR_TEXTURE));
     frames_till_toggle_status_text = 32;
+
+    started_sound = false;
 }
 
 void state_run_menu() {
+    if (all_tests_pass) {
+        if (!started_sound) {
+            started_sound = true;
+
+            mm_sound_effect congratulations = {
+                { SFX_CONGRATULATIONS } ,			// id
+                (int)(1.0f * (1<<10)),	// rate
+                0,		// handle
+                255,	// volume
+                127,	// panning
+            };
+
+            frames_till_music_start = 136;
+
+            mmEffectEx(&congratulations);
+        }
+
+        if (frames_till_music_start == 0) {
+            mmStart( MOD_MUSIC, MM_PLAY_LOOP );
+        }
+
+        if (frames_till_music_start > -1) {
+            frames_till_music_start--;
+        }
+    }
+
     frames_till_toggle_status_text--;
 
     if (frames_till_toggle_status_text == 0) {
