@@ -14,6 +14,11 @@ static const uint8_t CURSOR_TEXTURE[8][4] = {
     { 0x11, 0x11, 0x11, 0x01 },
 };
 
+#define RGB_TO_15(rgb) \
+    ((((rgb >> 16) & 0xFF) >> 3) <<  0) |\
+    ((((rgb >>  8) & 0xFF) >> 3) <<  5) |\
+    ((((rgb >>  0) & 0xFF) >> 3) << 10)
+
 void reset_display();
 void clear_screen();
 

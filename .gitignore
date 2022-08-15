@@ -3,3 +3,5 @@ build/
 *.sav
 *.elf
 source/grit/*
+compile_commands.json
+.cache

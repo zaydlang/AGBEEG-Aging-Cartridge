@@ -17,7 +17,7 @@ int main() {
     mmInitDefault( (mm_addr)soundbank_bin, 16 );
 
     while (1) {
-        Halt();
+        VBlankIntrWait();
         mmFrame();
 
         REG_IF = 0xFFFF;
