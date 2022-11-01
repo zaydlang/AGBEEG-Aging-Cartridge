@@ -37,6 +37,14 @@ TestResult test_cpu_swp_locks_bus();
 void test_cpu_swp_locks_bus_info_init();
 void test_cpu_swp_locks_bus_info_run();
 
+TestResult test_cpu_ldm_doesnt_lock_bus();
+void test_cpu_ldm_doesnt_lock_bus_info_init();
+void test_cpu_ldm_doesnt_lock_bus_info_run();
+
+TestResult test_cpu_stm_doesnt_lock_bus();
+void test_cpu_stm_doesnt_lock_bus_info_init();
+void test_cpu_stm_doesnt_lock_bus_info_run();
+
 TestResult test_cpu_runs_idles_throughout_dma();
 void test_cpu_runs_idles_throughout_dma_info_init();
 void test_cpu_runs_idles_throughout_dma_info_run();
@@ -57,10 +65,12 @@ static const TestCategory test_category_cartridge = {
 static const TestCategory test_category_cpu = {
     {
         { "SWP LOCKS BUS", test_cpu_swp_locks_bus, test_cpu_swp_locks_bus_info_init, test_cpu_swp_locks_bus_info_run },
+        { "LDM DOES NOT LOCK BUS", test_cpu_ldm_doesnt_lock_bus, test_cpu_ldm_doesnt_lock_bus_info_init, test_cpu_ldm_doesnt_lock_bus_info_run },
+        { "STM DOES NOT LOCK BUS", test_cpu_stm_doesnt_lock_bus, test_cpu_stm_doesnt_lock_bus_info_init, test_cpu_stm_doesnt_lock_bus_info_run },
         { NULL }
     },
     
-    1
+    3
 };
 
 static const TestCategory test_category_dma = {

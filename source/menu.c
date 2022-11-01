@@ -126,16 +126,16 @@ static void do_and_draw_test_results() {
             ci_send(test.name, strlen(test.name));
             ci_send(ci_result, 4);
 
-            // switch (test_result) {
-                // case PASS:
+            switch (test_result) {
+                case PASS:
                     ags_print("O", draw_x, draw_y, 5);
-                    // break;
-                // case FAIL:
-                    // ags_print("X", draw_x, draw_y, 4);
-                    // all_tests_in_category_pass = 0;
-                    // all_tests_pass = 0;
-                    // break;
-            // }
+                    break;
+                case FAIL:
+                    ags_print("X", draw_x, draw_y, 4);
+                    all_tests_in_category_pass = 0;
+                    all_tests_pass = 0;
+                    break;
+            }
 
             draw_x += 1;
         }

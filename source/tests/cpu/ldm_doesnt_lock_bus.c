@@ -11,41 +11,45 @@ static uint32_t dma_source = 0xCAFEBABE;
 __attribute((section(".ewram"))) 
 static uint32_t test_result;
 __attribute((section(".ewram"))) 
-char test_result_string[10];
+static char test_result_string[10];
 
 __attribute__((naked)) 
 __attribute__((target("arm"))) 
 __attribute__((section(".iwram")))
-int run_swp_test() {\
+int run_ldm_test() {\
 __asm__(\
     "push {r4 - r8}\n"\
 \
+    "ldr r0, =test_result\n"\
+    "ldr r1, =#0xDEADBEEF\n"\
+    "str r1, [r0]\n"\
+
     "ldr r0, =#0x040000D4\n"\
-    "ldr r2, =#0xDEADBEEF\n"\
 \
     "ldr r1, =dma_source\n"\
     "str r1, [r0], #4\n"\
 \
     "ldr r3, =test_result\n"\
     "str r3, [r0], #4\n"\
+    "sub r3, #4\n"\
 \
     "ldr r1, =#0x84000001\n"\
     "str r1, [r0]\n"\
 \
-    "swp r0, r2, [r3]\n"\
+    "ldm r3, {r0, r1}\n"\
+    "mov r0, r1\n"\
 \
-    "ldr r0, [r3]\n"\
     "pop {r4 - r8}\n"\
     "bx lr\n"\
 );
 }
 
-TestResult test_cpu_swp_locks_bus() {
-    uint32_t result = run_swp_test();
+TestResult test_cpu_ldm_doesnt_lock_bus() {
+    uint32_t result = run_ldm_test();
     return result == 0xCAFEBABE ? PASS : FAIL;
 }
 
-void test_cpu_swp_locks_bus_info_init() {
+void test_cpu_ldm_doesnt_lock_bus_info_init() {
     sprintf(test_result_string, "%lX", test_result);
 
     ags_print("EXPECTED VALUE IN", 6, 6, 3);
@@ -58,6 +62,6 @@ void test_cpu_swp_locks_bus_info_init() {
     ags_print(test_result_string, 17, 11, test_result == 0xCAFEBABE ? 5 : 4);
 }
 
-void test_cpu_swp_locks_bus_info_run() {
+void test_cpu_ldm_doesnt_lock_bus_info_run() {
 
 }
