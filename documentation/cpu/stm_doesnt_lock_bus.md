@@ -20,5 +20,5 @@ A) The STM opcode locks the bus during execution, causing the DMA to occur after
 B) The STM opcode does not lock the bus during execution, causing the STM write to occur after the
    DMA and therefore overwrite whatever value the DMA wrote.
 
-The DMA writes the value 0xCAFEBABE, and the STM writes the value 0xDEADBEEF. If done correctly,
-then 0xDEADBEEF should be the final value written in `test_result`
+The DMA writes the value 0xCAFEBABE twice, and the STM writes the values 0xDEDEDEDE and 0xBABABABA. 
+If done correctly, then 0xCAFEBABE and 0xBABABABA should be the final valueS written in `test_result`.

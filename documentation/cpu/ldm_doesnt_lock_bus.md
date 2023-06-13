@@ -19,5 +19,5 @@ A) The LDM opcode locks the bus during execution, causing the DMA to occur after
 B) The LDM opcode does not lock the bus during execution, causing the LDM read to occur after the
    DMA and therefore the LDM reads the modified value
 
-The region starts off with a value of 0xCAFEBABE, and DMA overwrites this with the value 0xDEADBEEF. 
-If done correctly, then 0xDEADBEEF should be the value the LDM reads.
+The region starts off with two values of 0xDEADBEEF and 0x00COFFEE, and DMA overwrites this with the value 0xCAFEBABE. 
+If done correctly, then 0xDEADBEEF and 0xCAFEBABE should be the values the LDM reads.

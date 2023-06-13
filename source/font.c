@@ -17,13 +17,15 @@ void init_print(int bg, int screenblock, int charblock) {
 
 static uint8_t get_texture_index_from_character(char c) {
     if ('A' <= c && c <= 'Z') return c - 'A' + 1;
-    if ('0' <= c && c <= '9') return c - '0' + 32;
+    if ('0' <= c && c <= '9') return c - '0' + 34;
 
     if (c == '.') return 27;
     if (c == '>') return 28;
     if (c == '!') return 29;
     if (c == '_') return 30;
     if (c == ':') return 31;
+    if (c == ']') return 32;
+    if (c == '[') return 33;
 
     return 0;
 }
