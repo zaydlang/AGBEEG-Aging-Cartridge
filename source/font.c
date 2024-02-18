@@ -24,8 +24,8 @@ static uint8_t get_texture_index_from_character(char c) {
     if (c == '!') return 29;
     if (c == '_') return 30;
     if (c == ':') return 31;
-    if (c == ']') return 32;
-    if (c == '[') return 33;
+    if (c == ']') return 42;
+    if (c == '[') return 43;
 
     return 0;
 }

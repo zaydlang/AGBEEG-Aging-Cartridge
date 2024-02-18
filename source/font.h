@@ -5,6 +5,14 @@ typedef struct PrintData {
     int screenblock;
 } PrintData;
 
+enum FontColor {
+    GOLD = 2,
+    VIOLET = 3,
+    RED = 4,
+    GREEN = 5,
+    PINK = 6,
+};
+
 void init_print(int bg, int screenblock, int charblock);
 void ags_print(char* string, int x, int y, int palette);
 void ags_printf(char* string, int x, int y, int palette, ...);
@@ -454,7 +462,27 @@ static const uint8_t FONT[NUM_CHARACTERS_IN_FONT][8][4] = {
         { 17,00,16,01 },
         { 17,17,17,01 },
         { 00,00,00,00 },
-    }
+    },
+    {
+        { 17,01,00,00 },
+        { 00,01,00,00 },
+        { 00,01,00,00 },
+        { 00,01,00,00 },
+        { 00,01,00,00 },
+        { 00,01,00,00 },
+        { 00,01,00,00 },
+        { 17,01,00,00 },
+    },
+    {
+        { 00,00,16,17 },
+        { 00,00,16,00 },
+        { 00,00,16,00 },
+        { 00,00,16,00 },
+        { 00,00,16,00 },
+        { 00,00,16,00 },
+        { 00,00,16,00 },
+        { 00,00,16,17 },
+    },
 };
 
 #endif

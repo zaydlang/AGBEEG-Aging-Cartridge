@@ -45,6 +45,10 @@ TestResult test_cpu_stm_doesnt_lock_bus();
 void test_cpu_stm_doesnt_lock_bus_info_init();
 void test_cpu_stm_doesnt_lock_bus_info_run();
 
+TestResult test_cpu_ldm_s_bit_mul();
+void test_cpu_ldm_s_bit_mul_init();
+void test_cpu_ldm_s_bit_mul_run();
+
 TestResult test_cpu_runs_idles_throughout_dma();
 void test_cpu_runs_idles_throughout_dma_info_init();
 void test_cpu_runs_idles_throughout_dma_info_run();
@@ -67,10 +71,10 @@ static const TestCategory test_category_cpu = {
         { "SWP LOCKS BUS", test_cpu_swp_locks_bus, test_cpu_swp_locks_bus_info_init, test_cpu_swp_locks_bus_info_run },
         { "LDM DOES NOT LOCK BUS", test_cpu_ldm_doesnt_lock_bus, test_cpu_ldm_doesnt_lock_bus_info_init, test_cpu_ldm_doesnt_lock_bus_info_run },
         { "STM DOES NOT LOCK BUS", test_cpu_stm_doesnt_lock_bus, test_cpu_stm_doesnt_lock_bus_info_init, test_cpu_stm_doesnt_lock_bus_info_run },
-        { NULL }
+        { "LDM S BIT MUL", test_cpu_ldm_s_bit_mul, test_cpu_ldm_s_bit_mul_init, test_cpu_ldm_s_bit_mul_run }
     },
     
-    3
+    4
 };
 
 static const TestCategory test_category_dma = {
