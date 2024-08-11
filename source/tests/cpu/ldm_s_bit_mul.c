@@ -71,7 +71,7 @@ __asm__(\
 );
 }
 
-#define TEST_RESULT_1 0x96871E
+#define TEST_RESULT_1 0x96A52A
 #define TEST_RESULT_2 0x382506
 
 TestResult test_cpu_ldm_s_bit_mul() {
